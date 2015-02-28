@@ -1,0 +1,31 @@
+body {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("../images/background.png");
+  background-attachment: fixed;
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: 100% 100%;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#main{
+	margin: 0 auto; 
+}
+
+.about-app{
+	top:20%;
+	margin: 0 auto; 
+	background-color: #E3E480;
+	opacity: 0.4;
+	width:50%;
+	height: 30%;
+}
+
+/*form{
+	margin: 0 auto; 
+	width:50%;
+}*/
