@@ -1,23 +1,13 @@
-<html>
+<html ng-app="tripClub">
 	<head>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="stylesheets/style.css">
-	</head>
-	<body>
-	<div id="fb-root"></div>
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular-route.min.js"></script>
 
-	<div class="container">
-	  <div class="row">
-	  	<div class="col-md-12">
-	  		<div class="container" id="main">
-				<div class="about-app"></div>
-				<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-				</fb:login-button>
-				<div id="status"></div>
-	  		</div>
-	  	</div>
-	  </div>
-	 </div>
-	 <script type="text/javascript" src="javascripts/fb_login.js"></script>
-	</body>
+		<script src="javascripts/app.js"></script>
+	 <!-- <script type="text/javascript" src="javascripts/fb_login.js"></script> -->
+	</head>
+	<body ng-view></body>
 </html>

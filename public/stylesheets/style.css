@@ -17,12 +17,18 @@ a {
 }
 
 .about-app{
-	top:20%;
 	margin: 0 auto; 
-	background-color: #E3E480;
+	background-color: #2c2c2c;
+	margin-top:10%;
 	opacity: 0.4;
-	width:50%;
-	height: 30%;
+	width:80%;
+	height: 40%;
+}
+
+#tagline{
+	color: white;
+	font-size: 30px;
+	text-align: center;
 }
 
 /*form{

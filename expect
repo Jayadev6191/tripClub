@@ -1,0 +1,8 @@
+28 Feb 16:01:23 - [33m[nodemon] v1.3.7[39m
+28 Feb 16:01:23 - [33m[nodemon] to restart at any time, enter `rs`[39m
+28 Feb 16:01:23 - [33m[nodemon] watching: *.*[39m
+28 Feb 16:01:23 - [32m[nodemon] starting `modulus deploy use project mysample? (yes) {send yes\r}`[39m
+[37mWelcome to [35mModulus[39m[39m
+[37mYou are logged in as [35mbilahari@gmail.com[39m[39m
+[37m[[31mError[39m] Directory "/Users/bakkiraju/Desktop/tripClub/use project mysample? (yes)" does not exist.[39m
+28 Feb 16:01:24 - [31m[nodemon] app crashed - waiting for file changes before starting...[39m

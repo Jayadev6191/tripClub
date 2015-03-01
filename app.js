@@ -19,7 +19,7 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
+console.log('hi');
 
 
 // catch 404 and forward to error handler
