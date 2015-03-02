@@ -31,6 +31,39 @@ a {
 	text-align: center;
 }
 
+#tab-package{
+	background-color: #2c2c2c;
+	opacity: 0.9;
+	height:100%;
+	padding: 20px;
+}
+
+section h3{
+	color: white;
+}
+
+#interests{
+	background-color: #2c2c2c;
+	opacity: 1.2;
+	width:60%;
+	height:60%;
+	/*float: right;*/
+	border-radius: 10px;
+}
+
+.checkboxes{
+	/*text-align: center;*/
+}
+
+.int{
+	text-align: center;
+	color:white;
+	font-size: 18px;
+}
+
+#details span{
+	color: white;
+}
 /*form{
 	margin: 0 auto; 
 	width:50%;

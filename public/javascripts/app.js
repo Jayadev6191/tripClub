@@ -1,22 +1,8 @@
 var tripClub=angular.module('tripClub',['ngRoute']);
 
-tripClub.config(["$routeProvider",function($routeProvider){
-	$routeProvider
-		.when('/',{
-			templateUrl:'/pages/login.html',
-			controller:'loginController'
-		})
 
-		.otherwise({
-			templateUrl:'/pages/main.html',
-			controller:'mainController'
-		})
-		
-
-}]);
-
-tripClub.controller('loginController',['$scope','$filter', '$http',function($scope,$filter,$http){
-		  // This is called with the results from from FB.getLoginStatus().
+tripClub.service('authCheckService',function(){
+			  // This is called with the results from from FB.getLoginStatus().
 	  function statusChangeCallback(response) {
 	    console.log('statusChangeCallback');
 	    console.log(response);
@@ -26,7 +12,7 @@ tripClub.controller('loginController',['$scope','$filter', '$http',function($sco
 	    // for FB.getLoginStatus().
 		    if (response.status === 'connected') {
 		      // Logged into your app and Facebook.
-		      testAPI(response.authResponse);
+		      testAPI(response.status);
 		    } else if (response.status === 'not_authorized') {
 		      // The person is logged into Facebook, but not your app.
 		      document.getElementById('status').innerHTML = 'Please log ' +
@@ -42,7 +28,7 @@ tripClub.controller('loginController',['$scope','$filter', '$http',function($sco
 	  // This function is called when someone finishes with the Login
 	  // Button.  See the onlogin handler attached to it in the sample
 	  // code below.
-	  $scope.checkLoginState=function() {
+	  var checkLoginState=function() {
 	    FB.getLoginStatus(function(response) {
 	      statusChangeCallback(response);
 	    });
@@ -68,11 +54,9 @@ tripClub.controller('loginController',['$scope','$filter', '$http',function($sco
 	  //    your app or not.
 	  //
 	  // These three cases are handled in the callback function.
-
-	  FB.getLoginStatus(function(response) {
-	    statusChangeCallback(response);
-	  });
-
+		  FB.getLoginStatus(function(response) {
+		    statusChangeCallback(response);
+		  });
 	  };
 
 	  // Load the SDK asynchronously
@@ -86,23 +70,101 @@ tripClub.controller('loginController',['$scope','$filter', '$http',function($sco
 
 	  // Here we run a very simple test of the Graph API after login is
 	  // successful.  See statusChangeCallback() for when this call is made.
-	  function testAPI(authResponse) {
+	  function testAPI(status) {
 	    	// console.log('Welcome!  Fetching your information.... ');
 		    FB.api('/me', function(response) {
-		      	location.href="#/main";
+		      	console.log(response.email);
+		      	if (status==="connected") {
+		      		location.href="#/main";	
+		      	};
+		      	
 		    });
-
-		    FB.api("/me/interests",function (response) {
-		      if (response && !response.error) {
-		        /* handle the result */
-		        console.log(response);
-		      }
-		    }
-		);
 	  }
+});
+
+
+tripClub.config(["$routeProvider",function($routeProvider){
+	$routeProvider
+		.when('/',{
+			templateUrl:'/pages/login.html',
+			controller:'loginController'
+		})
+
+		.otherwise({
+			templateUrl:'/pages/main.html',
+			controller:'mainController'
+		})
+		
+
+}]);
+
+tripClub.controller('loginController',['$scope','authCheckService', '$http',function($scope,authCheckService,$http){
+		authCheckService.checkLoginState;
+		// var d=authCheckService.abc
+		// console.log(d);
 }]);
 
 
 tripClub.controller('mainController',['$scope','$filter','$http',function($scope,$filter,$http){
-	console.log('hi');
+	var expedia_key = 'jtsBNOzl4b1SuVD2aD8KO5GfHCul7AJb';
+
+   $scope.interests = [
+	    'Adventure Sports', 
+	    'Restaurants', 
+	    'Shopping', 
+	    'Hiking',
+	    'Picnic'
+   ];
+
+    $scope.user_interests=[];
+	
+	// toggle selection for a given fruit by name
+  $scope.toggleSelection = function toggleSelection(interests) {
+    var index = $scope.user_interests.indexOf(interests);
+
+    // is currently selected
+    if (index > -1) {
+      $scope.user_interests.splice(index, 1);
+    }
+
+    // is newly selected
+    else {
+      $scope.user_interests.push(interests);
+    }
+    console.log($scope.user_interests);
+  };
+
+	//var twitter_key =
+	$scope.region="";
+
+	$scope.from=function(){
+		$scope.$watch('region',function(newValue,oldValue){
+				$http.get('http://terminal2.expedia.com/suggestions/regions?query='+newValue+'&apikey='+expedia_key,'').
+					success(function(res){
+						$scope.options=res;
+					})
+				});
+		}
+
+	$scope.to_region="";
+	$scope.to=function(){
+		$scope.$watch('to_region',function(newValue,oldValue){
+				$http.get('http://terminal2.expedia.com/suggestions/regions?query='+newValue+'&apikey='+expedia_key,'').
+					success(function(res){
+						$scope.to_options=res;
+					})
+				});
+		}
+
+	$scope.search_plan=function(){
+		var search_obj={
+			'from_region':$scope.region,
+			'to_region':$scope.to_region,
+			'to_date':$scope.to_date,
+			'from_date':$scope.from_date,
+			'trip_purpose':$scope.purpose,
+			'interests':$scope.user_interests
+		};
+		console.log(search_obj);
+	}
 }]);

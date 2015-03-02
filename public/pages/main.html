@@ -2,52 +2,69 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="container" id="main">
-			<!-- <ul>
-				<li>
-					
-				</li>
-
-				<li>
-					
-				</li>
-
-				<li>
-					
-				</li>
-			</ul> -->
-
-				<form autocomplete="off"> <div class="no-outline">
-				<h3 class="sub-600">Search Vacation Packages</h3> 
-				
+				<form autocomplete="off" type="post"> 
+				<div class="no-outline">
 				<section class="tab-pane on" id="tab-package"> 
 					<div id="package"> 
-  						<fieldset class="radio-set tablet-only">  
-  							<label name="fh" id="package-fh-label" class="check col"> 
-	  							<input type="radio" checked="" value="true:true:false:false"> 
-	  							<span class="inline-label">Flight + Hotel</span> 
-  							</label>  
+					<br>
+					</hr>
+						<div class="col-md-6" id="details">
+							<div class="row">
+								<h3>Plan it out</h3> 	
+								<fieldset class="radio-set tablet-only">  
+		  							<label> 
+			  							<span>From</span>
+			  							<input type="text" id="from" list="from_regions" ng-keypress="from();" ng-model="region" />
+			  							<datalist id="from_regions">
+			  								<option ng-repeat="places in options.sr" value="{{places.f}}">
+			  							</datalist>
+		  							</label>  
 
-  							<label name="fhc" id="package-fhc-label" class="check col"> 
-	  							<input type="radio" value="true:true:true:false"> 
-	  							<span class="inline-label">Flight + Hotel + Car</span> 
-  							</label>  
-  							<label class="check col"> 
-	  							<input type="radio" value="true:false:true:false"> 
-	  							<span class="inline-label">Flight + Car</span> 
-  							</label>
-  						</fieldset>
+		  							<label> 
+			  							<span>To</span>
+			  							<input type="text" id="to" list="to_regions" ng-keypress="to();" ng-model="to_region"/>
+			  							<datalist id="to_regions">
+			  								<option ng-repeat="places in to_options.sr" value="{{places.f}}">
+			  							</datalist>
+		  							</label>  
+	  							</fieldset>
+	  						</div>
+	  						<br>
+	  						<div class="row">
+	  							<fieldset class="">  
+		  							<label style="float:left;margin-right:3px;"> 
+			  							<span>From</span>
+			  							<input class="form-control input-xs" type="date" id="from-date" ng-model="from_date"/>
+			  							<br>
+		  							</label>
+		  							<label>
+		  								<span>To</span>
+			  							<input class="form-control input-xs" type="date" id="to-date" ng-model="to_date"/>
+		  							</label> 
+	  							</fieldset>
+  							</div>
 
-  						<fieldset class="radio-set tablet-only">  
-  							<label> 
-	  							<span>From</span>
-	  							<input type="text"></input>
-  							</label>  
-
-  							<label> 
-	  							<span>To</span>
-	  							<input type="text"></input>
-  							</label>  
-  						</fieldset>
+  							<div class="row">
+  								<textarea class="form-control" rows="2" placeholder="purpose of the trip" ng-model="purpose"></textarea>
+  								<br>
+  							</div>
+  							
+  							<div class="row">
+  								<button type="submit" class="btn btn-info" ng-click="search_plan()">Search</button>
+  							</div>
+  							
+						</div>
+						<div class="col-md-6">
+							<div id="interests">
+								<h3>Points of Interest</h3>
+								<div ng-repeat="interest in interests">
+									<input type="checkbox" value="{{interest|lowercase}}" 
+									ng-checked="user_interests.indexOf(interest) > -1"
+    							ng-click="toggleSelection(interest)">
+									<label class="int">{{interest}}</label>
+								</div>
+							</div>
+						</div>  						
   					</div>
   				</section>
   				</form>
